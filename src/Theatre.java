@@ -1,4 +1,4 @@
-public class Main {
+public class Theatre {
     public static void main(String[] args) {
         System.out.println("Открываем театральный сезон!\n");
 

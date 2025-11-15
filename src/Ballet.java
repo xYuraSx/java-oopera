@@ -1,5 +1,10 @@
 public class Ballet extends MusicalShow {
-    private String choreographer;
+    private final String choreographer;
+
+    // Геттер для поля choreographer
+    public String getChoreographer() {
+        return choreographer;
+    }
 
     public Ballet(String title, int duration, Director director, String musicAuthor,
                   String librettoText, String choreographer) {

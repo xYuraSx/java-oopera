@@ -23,15 +23,27 @@ public class Show {
     }
 
     public void replaceActor(Actor newActor, String oldActorSurname) {
-        for (int i = 0; i < listOfActors.size(); i++) {
-            if (listOfActors.get(i).surname.equals(oldActorSurname)) {
-                Actor oldActor = listOfActors.get(i);
-                listOfActors.set(i, newActor);
-                System.out.println("Актёр " + oldActor + " заменён на " + newActor);
-                return;
+        // Учитываем, что может быть несколько актеров с одной фамилией
+        ArrayList<Actor> foundActors = new ArrayList<>();
+
+        // Заменяем обычный for на enhanced for
+        for (Actor actor : listOfActors) {
+            if (actor.getSurname().equals(oldActorSurname)) {
+                foundActors.add(actor);
             }
         }
-        System.out.println("Актёр с фамилией '" + oldActorSurname + "' не найден в спектакле '" + title + "'");
+
+        if (foundActors.isEmpty()) {
+            System.out.println("Актёр с фамилией '" + oldActorSurname + "' не найден в спектакле '" + title + "'");
+        } else if (foundActors.size() > 1) {
+            System.out.println("Найдено несколько актёров с фамилией '" + oldActorSurname +
+                    "'. Замена невозможна из-за неоднозначности.");
+        } else {
+            Actor oldActor = foundActors.getFirst(); // Используем getFirst() вместо get(0)
+            int index = listOfActors.indexOf(oldActor);
+            listOfActors.set(index, newActor);
+            System.out.println("Актёр " + oldActor + " заменён на " + newActor);
+        }
     }
 
     public void printActors() {
